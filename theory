@@ -1,0 +1,64 @@
+ACCESS CONTOL
+
+1) 2 user bana dhanashree sakshi
+(sudo "adduser dhanashree ")
+2)2 groups bana  Sales and marketing 
+(sudo addgroup sales)
+3) Dhanashree ko sales mein daal sakshi ko marketing mein (adduser dhanashree sales)
+4) Then 2 folders banana ek jagah pe salesdata and Marketingdata name ka  (Desktop mein ya kahi aur )
+5) fir uske permissions check kar (ls -l) 
+6)Then folders ka group change kar salesdata ka group sales ko karde and marketingdata ka group marketing ka karde (chgrp sales salesdata aise)
+7) Then fir dono folders pe yeh run (sudo chmod o-x salesdata)
+8) fir dono user se baari baari login karke dhanashree (sales) ki hain toh marketingdata ka folder open karke ka try kar nahi hoga
+
+Architecture: 
+1.	Hardware Layer: At the lowest level, Linux interacts with hardware components such as the CPU, memory, storage devices, network interfaces, and other peripherals. 
+2.	Kernel: The Linux kernel is the core component of the operating system. It provides essential services such as process management, memory management, file system management, device management, and system call interface. 
+3.	System Libraries: Above the kernel, Linux provides a set of system libraries that includes the GNU C Library (glibc), which provides standard C library functions. 
+4.	System Utilities: Linux includes a collection of system utilities and commands that enable users to interact with the operating system and perform various tasks. These utilities include command-line tools for managing files, processes, users, and system configuration. 
+5.	User Interface: Linux supports various user interfaces, including command-line interfaces (CLI) and graphical user interfaces (GUI). The CLI, commonly accessed through a terminal emulator, allows users to interact with the system using text-based commands. 
+6.	Applications: The applications can be installed and managed using package management systems such as APT (Advanced Package Tool), YUM (Yellowdog Updater, Modified), or others depending on the Linux distribution. 
+Versions: 
+Commonly referred to as Linux distributions or simply "distros." These distributions include: 
+1.	Ubuntu: One of the most widely used Linux distributions, known for its ease of use, regular release cycle, and large community support. 
+2.	Debian: A stable and versatile distribution known for its commitment to free and open- source software principles. Debian is the foundation for many other distributions, including Ubuntu. 
+3.	Fedora: A community-driven distribution sponsored by Red Hat, known for its focus on innovation, frequent releases, and inclusion of cutting-edge technologies. 
+4.	Arch Linux: A lightweight and minimalist distribution designed for experienced users. It follows a rolling release model, meaning that updates are continuously delivered rather than in scheduled releases. 
+Security: 
+1.	User Authentication: Linux supports various authentication mechanisms, including traditional password authentication, SSH key-based authentication. 
+2.	Firewall and Network Security: Linux distributions typically include firewall utilities such as iptables or its more modern replacement, nftables, to control network traffic and protect against unauthorized access. 
+3.	Encryption: Linux supports encryption for data at rest and data in transit. Disk encryption technologies such as LUKS (Linux Unified Key Setup) provide full-disk encryption to protect sensitive data stored on disk drives. 
+
+ACCESS CONTOL
+Access control mechanisms are crucial components of operating systems that regulate the access of users and processes to system resources. Different mechanisms, such as discretionary access control (DAC), mandatory access control (MAC), and role-based access control (RBAC), offer distinct approaches to managing access rights. 
+Procedure: 
+1.	Setup a simulated operating system environment using suitable virtualization software. 
+2.	Implement different access control mechanisms within the simulated environment. 
+3.	Define test scenarios representing various access control requirements and security policies. 
+4.	Execute the test scenarios using appropriate test scripts or manual interactions. 
+5.	Collect data on access attempts, permissions granted/denied, and system behavior during the experiments. 
+6.	Analyze the collected data to evaluate the effectiveness of each access control mechanism. 
+8. Draw conclusions based on the experimental results. 
+Learning Outcomes: 
+1.	Gain practical experience in configuring and managing access control mechanisms in an operating system environment. 
+2.	Develop analytical skills in assessing the effectiveness of access control mechanisms based on experimental data. 
+ 
+ 
+3.	Understand the trade-offs between different access control mechanisms in terms of security, performance, and usability. 
+4.	Enhance problem-solving skills by identifying strengths and weaknesses of various access control approaches. 
+
+linux commands
+mkdir - to make a new directory
+ls - to list all file contents
+cat - display contents of a file
+cd - change directory
+pwd - show location of directory
+touch - use to create empty file
+mv - move  a file and directory
+rm - remove file
+cp - copy files and directories
+find - search for file in a directory
+nano - simple text editor
+head - display 1st few lines of file
+
+
