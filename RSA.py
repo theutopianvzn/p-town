@@ -1,112 +1,60 @@
-import random
+def is_prime(num):
+  """
+  Basic primality check (not cryptographically secure for large numbers)
+  """
+  if num <= 1:
+    return False
+  for i in range(2, int(num**0.5) + 1):
+    if num % i == 0:
+      return False
+  return True
+
+def generate_keypair(p, q):
+  """
+  Generates public (e, n) and private (d, n) key pairs
+  """
+  if not (is_prime(p) and is_prime(q)):
+    raise ValueError('Both numbers must be prime')
+  n = p * q
+  phi = (p - 1) * (q - 1)
+  e = 1
+  while e < phi and gcd(e, phi) != 1:
+    e += 1
+  d = pow(e, -1, phi)  # Modular inverse using pow (not cryptographically secure)
+  return ((e, n), (d, n))
 
 def gcd(a, b):
   """
-  This function calculates the greatest common divisor (GCD) of two integers.
-
-  Args:
-      a: The first integer.
-      b: The second integer.
-
-  Returns:
-      The GCD of a and b.
+  Euclidean algorithm for greatest common divisor
   """
   while b != 0:
     a, b = b, a % b
   return a
 
-def is_prime(num):
+def encrypt(pk, plaintext):
   """
-  This function checks if a number is prime.
-
-  Args:
-      num: The number to check.
-
-  Returns:
-      True if the number is prime, False otherwise.
+  Encrypts plaintext using public key (e, n)
   """
-  if num <= 1:
-    return False
-  if num <= 3:
-    return True
-  if num % 2 == 0 or num % 3 == 0:
-    return False
-  i = 5
-  while i * i <= num:
-    if num % i == 0 or num % (i + 2) == 0:
-      return False
-    i += 6
-  return True
+  key, n = pk
+  cipher = pow(plaintext, key, n)
+  return cipher
 
-def generate_keypair(p, q):
+def decrypt(sk, ciphertext):
   """
-  This function generates a public/private key pair using two prime numbers.
-
-  Args:
-      p: The first prime number.
-      q: The second prime number.
-
-  Returns:
-      A tuple containing the public key (e, n) and the private key (d, n).
+  Decrypts ciphertext using private key (d, n)
   """
-  n = p * q
-  phi_n = (p - 1) * (q - 1)
-  e = random.randrange(1, phi_n)
-  while gcd(e, phi_n) != 1:
-    e = random.randrange(1, phi_n)
-  d = pow(e, -1, phi_n)
-  return ((e, n), (d, n))
+  key, n = sk
+  plain = pow(ciphertext, key, n)
+  return plain
 
-def encrypt(plaintext, public_key):
-  """
-  This function encrypts a plaintext message using the public key.
-
-  Args:
-      plaintext: The message string to encrypt.
-      public_key: The public key (e, n) for encryption.
-
-  Returns:
-      The encrypted ciphertext as a list of integers.
-  """
-  e, n = public_key
-  ciphertext = []
-  for char in plaintext:
-    if char.isnumeric():
-      char_num = ord(char) - ord('0')
-    else:
-      char_num = ord(char) - ord('a') + 26
-    cipher_char = pow(char_num, e, n)
-    ciphertext.append(cipher_char)
-  return ciphertext
-
-def decrypt(ciphertext, private_key):
-  """
-  This function decrypts an encrypted ciphertext using the private key.
-
-  Args:
-      ciphertext: The encrypted message as a list of integers.
-      private_key: The private key (d, n) for decryption.
-
-  Returns:
-      The decrypted plaintext message as a string.
-  """
-  d, n = private_key
-  plaintext = ""
-  for cipher_char in ciphertext:
-    char_num = pow(cipher_char, d, n)
-    if char_num < 26:
-      plaintext += chr(char_num + ord('a'))
-    else:
-      plaintext += chr(char_num - 26 + ord('0'))
-  return plaintext
-
-# Example usage
+# Example usage (for illustration purposes only)
 p = 11
 q = 13
-public_key, private_key = generate_keypair(p, q)
-message = "This is a secret message!"
-ciphertext = encrypt(message, public_key)
-print("Original message:", message)
-print("Encrypted message:", ciphertext)
-decrypted_message = decrypt(ciphertext, private_key)
-print("Decrypted message:", decrypted_message)
+public, private = generate_keypair(p, q)
+print("Public key:", public)
+print("Private key:", private)
+
+message = "This is a secret message"
+encrypted_text = encrypt(public, ord(message[0]))  # Encrypt only the first character for simplicity
+decrypted_text = decrypt(private, encrypted_text)
+print("Original message:", chr(decrypted_text))
